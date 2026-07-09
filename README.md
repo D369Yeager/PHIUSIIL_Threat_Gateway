@@ -39,8 +39,6 @@ To execute the streaming training script (`train_stream_pipeline.py`), you must 
 
 ## 🗺️ Architectural Flow Map
 
-## 🗺️ Architectural Flow Map
-
 \`\`\`text
 [ FRONTEND LIGHTWEIGHT PERIMETER SHIELD ]
                │
