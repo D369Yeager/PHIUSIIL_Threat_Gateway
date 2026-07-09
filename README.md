@@ -39,47 +39,51 @@ To execute the streaming training script (`train_stream_pipeline.py`), you must 
 
 ## 🗺️ Architectural Flow Map
 
+## 🗺️ Architectural Flow Map
+
+\`\`\`text
 [ FRONTEND LIGHTWEIGHT PERIMETER SHIELD ]
-│
-▼
-1. phase1_usi.py  ──────(If USI Score >= 80)──────> [ INSTANT BLOCK ]
-│
-│ (If USI Score < 80: Status "Doubtful")
-▼
+               │
+               ▼
+       1. phase1_usi.py  ──────(If USI Score >= 80)──────> [ INSTANT BLOCK ]
+               │
+               │ (If USI Score < 80: Status "Doubtful")
+               ▼
 [ HEURISTIC DATA-MINING & TRANSLATION ENGINE ]
-│
-├─► 2. feature_extraction.py (Lexical & Probability Matrices)
-├─► 3. html_scraper.py       (DOM Structural Tag Analysis)
-└─► 4. url_title_matcher.py   (Algorithm 1 Alignment Checking)
-│
-▼
-5. master_pipeline.py  ───► [ Flattens Input into 1D NumPy Array ]
-│
-▼
+               │
+               ├─► 2. feature_extraction.py (Lexical & Probability Matrices)
+               ├─► 3. html_scraper.py       (DOM Structural Tag Analysis)
+               └─► 4. url_title_matcher.py   (Algorithm 1 Alignment Checking)
+               │
+               ▼
+       5. master_pipeline.py  ───► [ Flattens Input into 1D NumPy Array ]
+               │
+               ▼
 [ BACKEND LEARNING ENGINE & PERSISTENCE POOL ]
-│
-├─► 6. ensemble_core.py      (Hyperparameter & Model Matrix Core)
-├─► 7. streaming_ingestion.py (Fixed chunk_size=1 Data Ingestion)
-├─► 8. ensemble_voting.py     (Prequential Predict-Then-Train Engine)
-└─► 9. persistence_manager.py (SQLite Binary State Hard Drive Storage)
-│
-▼
+               │
+               ├─► 6. ensemble_core.py      (Hyperparameter & Model Matrix Core)
+               ├─► 7. streaming_ingestion.py (Fixed chunk_size=1 Data Ingestion)
+               ├─► 8. ensemble_voting.py     (Prequential Predict-Then-Train Engine)
+               └─► 9. persistence_manager.py (SQLite Binary State Hard Drive Storage)
+               │
+               ▼
 [ LIVE INTERCEPTION PERIMETER & USER INTERFACE APP ]
-│
-├─► 11. train_stream_pipeline.py ──► (Sound Alarm if Accuracy < 92%)
-│                                               │
-├─► 12. gateway_dashboard.py                    ▼
-│                                    [ CONCEPT_DRIFT_WARNING ]
-▼                                               │
+               │
+               ├─► 11. train_stream_pipeline.py ──► (Sound Alarm if Accuracy < 92%)
+               │                                               │
+               ├─► 12. gateway_dashboard.py                    ▼
+               │                                    [ CONCEPT_DRIFT_WARNING ]
+               ▼                                               │
 [ INCIDENT RESPONSE & OVERRIDES ]                               │
-│                                               ▼
-└─► 13. submit_feedback.py <──(SOC Analyst runs manually via PS)
-│
-▼
-10. production_gateway.py ──► [ Instant Weight Transformation ]
-│
-▼
-9. persistence_manager.py ──► [ Commit New Brain to Disk: STABLE ]
+               │                                               ▼
+               └─► 13. submit_feedback.py <──(SOC Analyst runs manually via PS)
+                               │
+                               ▼
+               10. production_gateway.py ──► [ Instant Weight Transformation ]
+                               │
+                               ▼
+               9. persistence_manager.py ──► [ Commit New Brain to Disk: STABLE ]
+\`\`\`
 
 ## 🛠️ Complete Chronological File Registry & System Significance
 
