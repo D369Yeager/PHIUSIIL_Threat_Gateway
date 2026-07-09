@@ -38,8 +38,61 @@ To execute the streaming training script (`train_stream_pipeline.py`), you must 
 ---
 
 ## 🗺️ Architectural Flow Map
-![System Pipeline Flowchart](architecture_flowmap.txt)
 
+```mermaid
+graph TD
+    %% Define Styles
+    classDef block1 fill:#e1f5fe,stroke:#0288d1,stroke-width:2px,color:#000;
+    classDef block2 fill:#efebe9,stroke:#5d4037,stroke-width:2px,color:#000;
+    classDef block3 fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,color:#000;
+    classDef block4 fill:#fff3e0,stroke:#f57c00,stroke-width:2px,color:#000;
+
+    subgraph Block_1 [Block 1: Frontend Gate]
+        A[phase1_usi.py]:::block1
+    end
+
+    subgraph Block_2 [Block 2: Heuristic Data-Mining Core]
+        B[feature_extraction.py]:::block2
+        C[html_scraper.py]:::block2
+        D[url_title_matcher.py]:::block2
+        E[master_pipeline.py]:::block2
+    end
+
+    subgraph Block_3 [Block 3: Streaming Ensembles]
+        F[ensemble_core.py]:::block3
+        G[streaming_ingestion.py]:::block3
+        H[ensemble_voting.py]:::block3
+    end
+
+    subgraph Block_4 [Block 4: Production & Override Management]
+        I[persistence_manager.py]:::block4
+        J[production_gateway.py]:::block4
+        K[train_stream_pipeline.py]:::block4
+        L[gateway_dashboard.py]:::block4
+        M[submit_feedback.py]:::block4
+    end
+
+    %% Flow Layout
+    A -->|If USI Score >= 80| BLOCK[🚫 INSTANT BLOCK]
+    A -->|If USI Score < 80: Doubtful| B
+    A -->|If USI Score < 80: Doubtful| C
+    A -->|If USI Score < 80: Doubtful| D
+    
+    B --> E
+    C --> E
+    D --> E
+    
+    E -->|Flattened 1D Array Vector| H
+    G -->|chunk_size=1 Generator Stream| H
+    F -->|Load Estimator Matrices| H
+    
+    H -->|Prequential Majority Vote| J
+    I <-->|SQLite Thread-Safe Binary State Storage phiusiil_state.db| J
+    K -->|Sliding Window Auditor Alert < 92% Acc| DRIFT[🚨 CONCEPT_DRIFT_WARNING]
+    
+    M -->|Asynchronous Manual SOC Analyst Override| J
+    J -->|Instant Weight Modification| H
+```
 
 ## 🛠️ Complete Chronological File Registry & System Significance
 
